@@ -1,0 +1,28 @@
+--- qwt-6.1.1/src/qwt_transform.cpp.orig	2014-09-28 23:36:40.805839150 +0400
++++ qwt-6.1.1/src/qwt_transform.cpp	2014-09-28 23:37:06.780839823 +0400
+@@ -15,10 +15,10 @@
+ #endif
+ 
+ //! Smallest allowed value for logarithmic scales: 1.0e-150
+-QT_STATIC_CONST_IMPL double QwtLogTransform::LogMin = 1.0e-150;
++const double QwtLogTransform::LogMin = 1.0e-150;
+ 
+ //! Largest allowed value for logarithmic scales: 1.0e150
+-QT_STATIC_CONST_IMPL double QwtLogTransform::LogMax = 1.0e150;
++const double QwtLogTransform::LogMax = 1.0e150;
+ 
+ //! Constructor
+ QwtTransform::QwtTransform()
+--- qwt-6.1.1/src/qwt_transform.h.orig	2014-09-28 23:36:34.502838986 +0400
++++ qwt-6.1.1/src/qwt_transform.h	2016-09-28 23:36:56.719839562 +0400
+@@ -107,8 +107,8 @@
+ 
+     virtual QwtTransform *copy() const;
+ 
+-    QT_STATIC_CONST double LogMin;
+-    QT_STATIC_CONST double LogMax;
++    static const double LogMin;
++    static const double LogMax;
+ };
+ 
+ /*!
