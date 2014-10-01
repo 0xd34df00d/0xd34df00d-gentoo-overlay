@@ -4,9 +4,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_3} )
-
-inherit cmake-utils git-r3 python-r1
+inherit cmake-utils git-r3 multibuild
 
 DESCRIPTION="Qt terminal emulator widget"
 HOMEPAGE="https://github.com/qterminal/qtermwidget"
@@ -15,7 +13,7 @@ EGIT_REPO_URI="https://github.com/qterminal/qtermwidget.git"
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug python qt4 qt5"
+IUSE="debug qt4 qt5"
 
 REQUIRED_USE="|| ( qt4 qt5 )"
 
@@ -31,47 +29,63 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	cmake-utils_src_prepare
 	sed \
 		-e 's/int scheme/const QString \&name/' \
 		-i pyqt4/qtermwidget.sip || die
+
+	MULTIBUILD_VARIANTS=( )
+	if use qt4; then
+		MULTIBUILD_VARIANTS+=( qt4-shared )
+	fi
+	if use qt5; then
+		MULTIBUILD_VARIANTS+=( qt5-shared )
+	fi
+
+	multibuild_copy_sources
+
+	preparation() {
+		CMAKE_USE_DIR=${BUILD_DIR}
+		cmake-utils_src_prepare
+	}
+
+	multibuild_foreach_variant run_in_build_dir preparation
 }
 
 src_configure() {
-	local mycmakeargs=(
-		$(cmake-utils_use_use qt5)
-		$(cmake-utils_use_build qt4 DESIGNER_PLUGIN)
-	)
-	cmake-utils_src_configure
+	preparation() {
+		CMAKE_USE_DIR=${BUILD_DIR}
+		case "${MULTIBUILD_VARIANT}" in
+			qt4-*)
+				local mycmakeargs=(
+				)
+				cmake-utils_src_configure
+			;;
+			qt5-*)
+				local mycmakeargs=(
+					$(cmake-utils_use_use qt5)
+					-DBUILD_DESIGNER_PLUGIN=0
+				)
+				cmake-utils_src_configure
+			;;
+		esac
+	}
 
-	# cmake-utils.eclass exports BUILD_DIR only after configure phase, so sed it here
-	sed \
-		-e "/extra_lib_dirs/s@\.\.@${BUILD_DIR}@" \
-		-e '/extra_libs/s/qtermwidget/qtermwidget4/' \
-		-i pyqt4/config.py || die "sed config.py failed"
-
-	if use python; then
-		configuration() {
-			"${PYTHON}" config.py || die "${PYTHON} config.py failed"
-		}
-		BUILD_DIR="${S}/pyqt4" python_copy_sources
-		BUILD_DIR="${S}/pyqt4" python_parallel_foreach_impl run_in_build_dir configuration
-	fi
+	multibuild_foreach_variant run_in_build_dir preparation
 }
 
 src_compile() {
-	cmake-utils_src_compile
+	compilation() {
+		CMAKE_USE_DIR=${BUILD_DIR}
+		cmake-utils_src_compile
 
-	if use python; then
-		BUILD_DIR="${S}/pyqt4" python_parallel_foreach_impl run_in_build_dir emake
-	fi
+	}
+	multibuild_foreach_variant run_in_build_dir compilation
 }
 
 src_install() {
-	cmake-utils_src_install
-
-	if use python; then
-		BUILD_DIR="${S}/pyqt4" python_parallel_foreach_impl run_in_build_dir emake DESTDIR="${D}" install
-		BUILD_DIR="${S}/pyqt4" python_parallel_foreach_impl python_optimize
-	fi
+	installation() {
+		CMAKE_USE_DIR=${BUILD_DIR}
+		cmake-utils_src_install
+	}
+	multibuild_foreach_variant run_in_build_dir installation
 }
