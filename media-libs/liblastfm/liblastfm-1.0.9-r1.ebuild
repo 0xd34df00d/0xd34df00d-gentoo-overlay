@@ -65,10 +65,10 @@ src_prepare() {
 		CMAKE_USE_DIR=${BUILD_DIR}
 		case "${MULTIBUILD_VARIANT}" in
 			qt4-*)
-				sed -e "90,100s/\<lastfm\>/lastfm-qt4/g" -i src/CMakeLists.txt || die
+				sed -e "76,79s/\${LASTFM_LIB_VERSION_SUFFIX}/-qt4/g" -i CMakeLists.txt || die
 			;;
 			qt5-*)
-				sed -e "90,100s/\<lastfm\>/lastfm-qt5/g" -i src/CMakeLists.txt || die
+				sed -e "76,79s/\${LASTFM_LIB_VERSION_SUFFIX}/-qt5/g" -i CMakeLists.txt || die
 			;;
 		esac
 		cmake-utils_src_prepare
