@@ -33,6 +33,8 @@ src_prepare() {
 		-e 's/int scheme/const QString \&name/' \
 		-i pyqt4/qtermwidget.sip || die
 
+	EPATCH_SOURCE="${FILESDIR}" EPATCH_SUFFIX="patch" EPATCH_FORCE="yes" epatch
+
 	MULTIBUILD_VARIANTS=( )
 	if use qt4; then
 		MULTIBUILD_VARIANTS+=( qt4-shared )
