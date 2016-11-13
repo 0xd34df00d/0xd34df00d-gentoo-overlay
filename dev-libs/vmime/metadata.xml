@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>0xd34df00d@gmail.com</email>
+		<name>G. Rudoy</name>
+	</maintainer>
+	<longdescription lang="en">
+		VMime is a powerful C++ class library for working with RFC-822 and MIME messages and Internet messaging services like IMAP, POP or SMTP.
+	</longdescription>
+	<use>
+		<flag name="pop3">Enable POP3 protocol.</flag>
+		<flag name="smtp">Enable SMTP protocol.</flag>
+		<flag name="sendmail">Enable Sendmail protocol.</flag>
+	</use>
+</pkgmetadata>
