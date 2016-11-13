@@ -9,7 +9,7 @@ inherit cmake-utils versionator eutils user
 DESCRIPTION="C++ library for developing interactive web applications."
 MY_P=${P/_/-}
 HOMEPAGE="http://webtoolkit.eu/"
-SRC_URI="mirror://sourceforge/witty/wt/3.3.2/${MY_P}.tar.gz"
+SRC_URI="https://github.com/kdeforche/wt/archive/${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
