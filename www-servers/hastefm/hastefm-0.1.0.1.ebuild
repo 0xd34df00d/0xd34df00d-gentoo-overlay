@@ -11,14 +11,14 @@ inherit haskell-cabal
 
 DESCRIPTION="Fetches some artist info from Last.FM for which no API is provided"
 HOMEPAGE="https://github.com/0xd34df00d/hastefm"
-SRC_URI="https://github.com/0xd34df00d/${PN}/archive/${PV}.tar.gz"
+SRC_URI="https://github.com/0xd34df00d/${PN}/archive/v${PV}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND=">=dev-haskell/aeson-0.11:=[profile?] <dev-haskell/aeson-0.12:=[profile?]
+RDEPEND=">=dev-haskell/aeson-1.0:=[profile?]
 	dev-haskell/io-streams:=[profile?]
 	dev-haskell/snap-core:=[profile?]
 	dev-haskell/snap-server:=[profile?]
