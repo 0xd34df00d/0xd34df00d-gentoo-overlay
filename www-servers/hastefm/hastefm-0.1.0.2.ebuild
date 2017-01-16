@@ -29,3 +29,9 @@ RDEPEND=">=dev-haskell/aeson-1.0:=[profile?]
 DEPEND="${RDEPEND}
 	>=dev-haskell/cabal-1.18.1.3
 "
+
+src_install() {
+	haskell-cabal_src_install
+	newinitd "etc/openrc/initd" "${PN}"
+	newconfd "etc/openrc/confd" "${PN}"
+}
