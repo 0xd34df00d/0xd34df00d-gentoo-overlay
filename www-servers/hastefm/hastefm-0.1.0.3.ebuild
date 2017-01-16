@@ -34,4 +34,6 @@ src_install() {
 	haskell-cabal_src_install
 	newinitd "etc/openrc/initd" "${PN}"
 	newconfd "etc/openrc/confd" "${PN}"
+
+	dodir /var/log/hastefm
 }
