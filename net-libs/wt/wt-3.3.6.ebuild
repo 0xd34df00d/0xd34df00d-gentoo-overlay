@@ -1,4 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-libs/wt/wt-3.3.1.ebuild,v 1.3 2013/11/16 09:42:54 mattm Exp $
 
@@ -79,24 +79,24 @@ src_configure() {
 	local mycmakeargs=(
 		-DDESTDIR="${D}"
 		-DLIB_INSTALL_DIR=$(get_libdir)
-		$(cmake-utils_use test BUILD_TESTS)
+		-DBUILD_TESTS=$(usex test)
 		-DSHARED_LIBS=ON
 		-DMULTI_THREADED=ON
 		-DUSE_SYSTEM_SQLITE3=ON
 		-DWEBUSER=wt
 		-DWEBGROUP=wt
-		$(cmake-utils_use extjs ENABLE_EXT)
-		$(cmake-utils_use graphicsmagick ENABLE_GM)
-		$(cmake-utils_use pdf ENABLE_HARU)
-		$(cmake-utils_use postgres ENABLE_POSTGRES)
-		$(cmake-utils_use sqlite ENABLE_SQLITE)
-		$(cmake-utils_use mysql ENABLE_MYSQL)
-		$(cmake-utils_use fcgi CONNECTOR_FCGI)
-		$(cmake-utils_use server CONNECTOR_HTTP)
-		$(cmake-utils_use ssl WT_WITH_SSL)
-		$(cmake-utils_use zlib HTTP_WITH_ZLIB)
+		-DENABLE_EXT=$(usex extjs)
+		-DENABLE_GM=$(usex graphicsmagick)
+		-DENABLE_HARU=$(usex pdf)
+		-DENABLE_POSTGRES=$(usex postgres)
+		-DENABLE_SQLITE=$(usex sqlite)
+		-DENABLE_MYSQL=$(usex mysql)
+		-DCONNECTOR_FCGI=$(usex fcgi)
+		-DCONNECTOR_HTTP=$(usex server)
+		-DWT_WITH_SSL=$(usex ssl)
+		-DHTTP_WITH_ZLIB=$(usex zlib)
+		-DINSTALL_RESOURCES=$(usex resources)
 		-DBUILD_EXAMPLES=OFF
-		$(cmake-utils_use resources INSTALL_RESOURCES)
 	)
 
 	cmake-utils_src_configure
