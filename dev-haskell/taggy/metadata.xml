@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="project">
+		<email>haskell@gentoo.org</email>
+		<name>Gentoo Haskell</name>
+	</maintainer>
+	<longdescription>
+		/taggy/ is a simple package for parsing HTML (and should work with XML)
+		written on top of the &lt;http://hackage.haskell.org/package/attoparsec attoparsec&gt;
+		library, which makes it one of the most efficient (space and time consumption wise)
+		on hackage.
+		
+		This is the root module of /taggy/. It reexports everything
+		from the package. See each module&#39;s docs for details about
+		the functions and types involved in /taggy/.
+		
+		While we&#39;ve been testing the parser on /many/ pages, it may still
+		be a bit rough around the edges. Let us know on &lt;http://github.com/alpmestan/taggy/issues github&gt;
+		if you have any problem.
+		
+		If you like to look at your HTML through
+		various optical instruments, feel free to take a look at
+		the companion &lt;http://hackage.haskell.org/package/taggy-lens taggy-lens&gt;
+		package we&#39;ve put up together. It makes HTML parsing a piece of cake.
+		
+		If you want to parse a document as list of tags
+		and go through it as some kind of stream by just picking
+		what you need, head to &quot;Text.Taggy.Parser&quot; and take
+		a look at &#39;Text.Taggy.Parser.taggyWith&#39; and
+		&#39;Text.Taggy.Parser.run&#39;.
+		
+		If you want to parse the document as a DOM tree and
+		traverse it to find the information you need,
+		use &#39;Text.Taggy.DOM.parseDOM&#39;. This is especially useful
+		when used in conjunction with &lt;http://hackage.haskell.org/package/taggy-lens taggy-lens&gt;.
+		
+		If you build some HTML manually
+		or just transform some existing DOM tree
+		and want to turn it into a &#39;Data.Text.Lazy.Text&#39;
+		head to &quot;Text.Taggy.Renderer&quot; and look at &#39;Text.Taggy.Renderer.render&#39;.
+	</longdescription>
+</pkgmetadata>
