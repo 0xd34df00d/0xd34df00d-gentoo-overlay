@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<herd>leechcraft</herd>
 	<maintainer>
-		<email>maksbotan@gentoo.org</email>
-		<name>Maxim Koltsov</name>
+		<email>0xd34df00d@gmail.com</email>
+		<name>Georg Rudoy</name>
 	</maintainer>
 </pkgmetadata>
