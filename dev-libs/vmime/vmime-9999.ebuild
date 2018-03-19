@@ -8,7 +8,7 @@ inherit cmake-utils git-r3
 
 DESCRIPTION="VMime mail library"
 HOMEPAGE="https://github.com/kisli/vmime"
-EGIT_REPO_URI="https://github.com/0xd34df00d/vmime.git"
+EGIT_REPO_URI="https://github.com/kisli/vmime.git"
 
 LICENSE="GPL-3"
 SLOT="0"
