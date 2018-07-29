@@ -26,9 +26,7 @@ src_prepare() {
 	default
 
 	local remove_me=(
-		bin/gdb/bin
-		bin/gdb/lib
-		bin/gdb/share
+		bin/gdb
 		bin/cmake
 		license/CMake*
 		plugins/tfsIntegration/lib/native/hpux
