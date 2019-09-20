@@ -70,7 +70,7 @@ src_configure() {
 }
 
 src_compile() {
-	emake STRIP="true" -j1 world VERBOSE=1
+	emake STRIP="true" world VERBOSE=1
 }
 
 src_test() {
