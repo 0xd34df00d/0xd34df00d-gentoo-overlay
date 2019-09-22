@@ -22,14 +22,14 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	dev-ml/findlib
 	doc? (
-		media-libs/netpbm[png,zlib]
-		virtual/latex-base
 		dev-tex/hevea
 		dev-tex/xcolor
-		dev-texlive/texlive-pictures
-		dev-texlive/texlive-mathscience
 		dev-texlive/texlive-latexextra
-		)"
+		dev-texlive/texlive-mathscience
+		dev-texlive/texlive-pictures
+		media-libs/netpbm[png,zlib]
+		virtual/latex-base
+	)"
 
 S=${WORKDIR}/${MY_P}
 
