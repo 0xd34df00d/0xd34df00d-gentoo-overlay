@@ -31,10 +31,10 @@ DEPEND="${RDEPEND}
 		virtual/latex-base
 	)"
 
-S=${WORKDIR}/${MY_P}
+S="${WORKDIR}/${MY_P}"
 
 src_configure() {
-	ocaml_lib=$(ocamlc -where)
+	ocaml_lib=$(ocamlc -where) || die
 	local myconf=(
 		-prefix /usr
 		-bindir /usr/bin
