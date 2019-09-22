@@ -3,8 +3,6 @@
 
 EAPI="7"
 
-inherit eutils multilib
-
 MY_PV=${PV/_p/pl}
 MY_P=${PN}-${MY_PV}
 
