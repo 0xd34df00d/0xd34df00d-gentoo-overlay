@@ -30,11 +30,11 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	default
-
 	# requires network connection, bug #623708
 	sed -e "/qxmppiceconnection/d" \
 		-i tests/CMakeLists.txt || die "failed to drop single test"
+
+	cmake-utils_src_prepare
 }
 
 src_configure() {
