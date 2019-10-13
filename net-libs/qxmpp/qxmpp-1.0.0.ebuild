@@ -33,6 +33,10 @@ src_prepare() {
 	# requires network connection, bug #623708
 	sed -e "/qxmppiceconnection/d" \
 		-i tests/CMakeLists.txt || die "failed to drop single test"
+	sed -e "/qxmppserver/d" \
+		-i tests/CMakeLists.txt || die "failed to drop single test"
+	sed -e "/qxmpptransfermanager/d" \
+		-i tests/CMakeLists.txt || die "failed to drop single test"
 
 	cmake-utils_src_prepare
 }
