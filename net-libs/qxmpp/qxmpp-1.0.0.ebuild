@@ -25,6 +25,8 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	test? ( dev-qt/qttest:5 )
+"
+BDEPEND="
 	doc? ( app-doc/doxygen )
 "
 
