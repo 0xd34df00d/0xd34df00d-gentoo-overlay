@@ -15,10 +15,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE="debug doc opus +speex test theora vpx"
 
 RDEPEND="
-	dev-qt/qtcore
-	dev-qt/qtnetwork[ssl]
-	dev-qt/qtxml
-	dev-util/cmake
+	dev-qt/qtcore:5
+	dev-qt/qtnetwork:5[ssl]
+	dev-qt/qtxml:5
 	opus? ( media-libs/opus )
 	speex? ( media-libs/speex )
 	theora? ( media-libs/libtheora )
