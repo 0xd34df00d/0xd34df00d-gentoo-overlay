@@ -47,6 +47,7 @@ src_configure() {
 		-DBUILD_DOCUMENTATION=$(usex doc)
 		-DBUILD_EXAMPLES=OFF
 		-DBUILD_TESTS=$(usex test)
+		-DBUILD_INTERNAL_TESTS=$(usex test)
 		-DWITH_OPUS=$(usex opus)
 		-DWITH_SPEEX=$(usex speex)
 		-DWITH_THEORA=$(usex theora)
