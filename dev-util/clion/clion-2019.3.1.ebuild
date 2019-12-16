@@ -6,14 +6,16 @@ EAPI=7
 inherit desktop eutils
 
 DESCRIPTION="A complete toolset for C and C++ development"
-HOMEPAGE="http://www.jetbrains.com/clion"
-SRC_URI="http://download.jetbrains.com/cpp/CLion-${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://www.jetbrains.com/clion"
+SRC_URI="https://download.jetbrains.com/cpp/CLion-${PV}.tar.gz -> ${P}.tar.gz"
 
-LICENSE="IDEA
-	|| ( IDEA_Academic IDEA_Classroom IDEA_OpenSource IDEA_Personal )"
+LICENSE="|| ( IDEA IDEA_Academic IDEA_Classroom IDEA_OpenSource IDEA_Personal )
+	Apache-1.1 Apache-2.0 BSD BSD-2 CC0-1.0 CDDL-1.1 CPL-0.5 CPL-1.0
+	EPL-1.0 EPL-2.0 GPL-2 GPL-2-with-classpath-exception GPL-3 ISC JDOM
+	LGPL-2.1+ LGPL-3 MIT MPL-1.0 MPL-1.1 OFL public-domain PSF-2 UoI-NCSA ZLIB"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-RESTRICT="splitdebug"
+RESTRICT="bindist mirror splitdebug"
 IUSE="custom-jdk"
 
 # RDEPENDS may cause false positives in repoman.
@@ -33,9 +35,13 @@ src_prepare() {
 		bin/lldb/linux
 		bin/cmake
 		license/CMake*
+		lib/pty4j-native/linux/ppc64le
 	)
 
-	use custom-jdk || remove_me+=( jre64 )
+	use amd64 || remove_me+=( bin/fsnotifier64 lib/pty4j-native/linux/x86_64)
+	use x86 || remove_me+=( bin/fsnotifier lib/pty4j-native/linux/x86)
+
+	use custom-jdk || remove_me+=( jbr )
 
 	rm -rv "${remove_me[@]}" || die
 }
@@ -45,11 +51,18 @@ src_install() {
 
 	insinto "${dir}"
 	doins -r *
-	fperms 755 "${dir}"/bin/{clion.sh,fsnotifier{,64},clang/linux/clang{d,-tidy}}
+	fperms 755 "${dir}"/bin/{clion.sh,clang/linux/clang{d,-tidy}}
+
+	if use amd64; then
+		fperms 755 "${dir}"/bin/fsnotifier64
+	fi
+	if use x86; then
+		fperms 755 "${dir}"/bin/fsnotifier
+	fi
 
 	if use custom-jdk; then
-		if [[ -d jre64 ]]; then
-		fperms 755 "${dir}"/jre64/bin/{java,jjs,keytool,orbd,pack200,policytool,rmid,rmiregistry,servertool,tnameserv,unpack200}
+		if [[ -d jbr ]]; then
+		fperms 755 "${dir}"/jbr/bin/{jaotc,java,javac,jdb,jjs,jrunscript,keytool,pack200,rmid,rmiregistry,serialver,unpack200}
 		fi
 	fi
 

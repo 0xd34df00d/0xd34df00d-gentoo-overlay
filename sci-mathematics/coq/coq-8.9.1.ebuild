@@ -1,9 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
-
-inherit eutils multilib
+EAPI="7"
 
 MY_PV=${PV/_p/pl}
 MY_P=${PN}-${MY_PV}
@@ -24,19 +22,19 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	dev-ml/findlib
 	doc? (
-		media-libs/netpbm[png,zlib]
-		virtual/latex-base
 		dev-tex/hevea
 		dev-tex/xcolor
-		dev-texlive/texlive-pictures
-		dev-texlive/texlive-mathscience
 		dev-texlive/texlive-latexextra
-		)"
+		dev-texlive/texlive-mathscience
+		dev-texlive/texlive-pictures
+		media-libs/netpbm[png,zlib]
+		virtual/latex-base
+	)"
 
-S=${WORKDIR}/${MY_P}
+S="${WORKDIR}/${MY_P}"
 
 src_configure() {
-	ocaml_lib=$(ocamlc -where)
+	ocaml_lib=$(ocamlc -where) || die
 	local myconf=(
 		-prefix /usr
 		-bindir /usr/bin
@@ -70,7 +68,7 @@ src_configure() {
 }
 
 src_compile() {
-	emake STRIP="true" -j1 world VERBOSE=1
+	emake STRIP="true" world VERBOSE=1
 }
 
 src_test() {
