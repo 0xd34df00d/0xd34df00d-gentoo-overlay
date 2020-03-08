@@ -33,11 +33,11 @@ BDEPEND="
 src_prepare() {
 	# requires network connection, bug #623708
 	sed \
-		-e "/qxmppiceconnection/d" \
-	    -e "/qxmppserver/d" \
-	    -e "/qxmpptransfermanager/d" \
-		-i tests/CMakeLists.txt \
-		|| die "failed to drop single test"
+			-e "/qxmppiceconnection/d" \
+			-e "/qxmppserver/d" \
+			-e "/qxmpptransfermanager/d" \
+			-i tests/CMakeLists.txt \
+			|| die "failed to drop certain network tests"
 
 	cmake-utils_src_prepare
 }
