@@ -6,7 +6,7 @@ inherit eutils desktop
 
 SLOT="0"
 PV_STRING="$(ver_cut 2-6)"
-MY_PV="$(ver_cut 1-3)"
+MY_PV="$(ver_cut 1-2)"
 MY_PN="idea"
 # Using the most recent Jetbrains Runtime binaries available at the time of writing
 # As the exact bundled versions ( jre 11 build 159.30 and jre 8 build 1483.39 ) aren't
@@ -39,7 +39,7 @@ RDEPEND="${DEPEND}
 	dev-util/lldb"
 BDEPEND="dev-util/patchelf"
 RESTRICT="splitdebug"
-S="${WORKDIR}/${MY_PN}-IC-$(ver_cut 4-6)"
+S="${WORKDIR}/${MY_PN}-IC-$(ver_cut 3-6)"
 
 QA_PREBUILT="opt/${PN}-${MY_PV}/*"
 
