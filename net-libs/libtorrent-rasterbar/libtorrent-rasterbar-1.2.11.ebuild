@@ -23,7 +23,7 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RESTRICT="!test? ( test )"
 
-S="${WORKDIR}/libtorrent-libtorrent-${PV}"
+S="${WORKDIR}/libtorrent-${PV}"
 
 RDEPEND="
 	dev-libs/boost:=[threads]
