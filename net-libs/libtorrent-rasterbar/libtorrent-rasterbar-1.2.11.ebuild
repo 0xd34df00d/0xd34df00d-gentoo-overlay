@@ -8,7 +8,7 @@ PYTHON_REQ_USE="threads(+)"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit autotools distutils-r1
+inherit autotools flag-o-matic distutils-r1
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="https://libtorrent.org https://github.com/arvidn/libtorrent"
@@ -45,6 +45,7 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	mkdir -p "${S}"/build-aux || die
 	touch "${S}"/build-aux/config.rpath || die
+	append-cxxflags -std=c++14
 	eautoreconf
 
 	default
@@ -81,6 +82,7 @@ src_configure() {
 			econf "${myeconfargs[@]}" \
 				--enable-python-binding \
 				--with-boost-python="boost_${EPYTHON/./}"
+			sed s/-std=c++11//g < bindings/python/compile_cmd > bindings/python/compile_cmd.new || die
 		}
 		distutils-r1_src_configure
 	fi
